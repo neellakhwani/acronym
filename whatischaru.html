@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8" />
+    <title>What Is Gyan??</title>
+    <!-- inport Work Sans from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,600" rel="stylesheet">
+    <style>
+        /* 3 Css variable for BGcolor, textcolor, accentcolor */
+        :root {
+            --AccentColor: #hsl(0, 0%, 100%);
+            --BackgroundColor: #hsl(0, 0%, 0%);
+            --TextColor: hsl(0, 0%, 0%);
+        }
+
+        body {
+            background-color: var(--BackgroundColor);
+            color: #fff;
+            font-family: "Work Sans", Helvetica, Arial, sans-serif;
+            font-size: 1.5em;
+            font-weight: 300;
+            line-height: 1.5;
+            margin: 0;
+            padding: 10%;
+            text-align: center;
+        }
+        #title {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+            padding: 0;
+            text-align: center;
+            color: var(--AccentColor);
+        }
+        #main {
+            font-size: 4em;
+            font-weight: 300;
+            line-height: 1.1em;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: var(--TextColor);
+        }
+
+        button{
+            font-family: "Work Sans", Helvetica, Arial, sans-serif;
+            background-color: var(--AccentColor);
+            border: none;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 400;
+            margin: 28px 0 0 0;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-align: center;
+            transition: .1s;
+            border: 2px var(--AccentColor) solid;
+        }
+
+        button:hover{
+            background-color: var(--BackgroundColor)
+            color: #eee;
+            border: 2px var(--AccentColor) solid;
+        }
+        
+        button:active{
+            background-color: #000;
+            color: #ddd;
+            transform: translateY(1px);
+        }
+
+    /* class to animate from blurred element to unblurred element */
+    .blur-in {
+        -webkit-animation: blur-in 1s ease-in-out;
+        -moz-animation: blur-in 1s ease-in-out;
+        -o-animation: blur-in 1s ease-in-out;
+        animation: blur-in 1s ease-in-out;
+    }
+    /* blur-in definition */
+    @-webkit-keyframes blur-in {
+        0% {
+            -webkit-filter: blur(10px);
+            filter: blur(10px);
+            opacity: 0;
+        }
+        100% {
+            -webkit-filter: blur(0);
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+            /* mobile only css */
+            @media only screen and (max-width: 600px) {
+            body {
+                padding: 25% 0 0 0;
+            }
+            #main {
+                font-size: 2.5em;
+            }
+            button {
+                position: absolute;
+                bottom: 10%;
+                left: 10%;
+                width: 80vw;
+                margin: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="title">What is Charu?</div>
+    <div id="main"></div>
+    <button>Regenerate</button>
+    <script>
+
+        var expand = new Array(
+            'Consciousness, Humanism, And Radical Understanding',
+            'Categorical imperative, Human Agency, and Rational Unity',
+            'Cheerful Hedgehog And Raccoon Unity',
+            'Confused Hens And Rude Unicorns',
+            'Cats Have Awesome Rhythm, Uh?',
+            'Caffeine High Assists Real Understanding',
+            'Coconuts Have A Rough Underbelly',
+            'CHihuahuas Are Really Unpredictable',
+            'Cupcakes, Hamburgers And Really Unhealthy Snacks',
+            'Computational Heterogeneous Analysis And Research Unit',
+            'Cryogenic Hydrogen-Argon Recovery Unit',
+            'Compact High-energy Accelerator And Radiation Unit',
+        );
+      
+          // function to take an array and return a random string
+          function randomString(array) {
+              var randomIndex = Math.floor(Math.random() * array.length);
+              return array[randomIndex];
+          }
+      
+          // function to insert string into div with id "main"
+          function insertString(string) {
+              var main = document.getElementById("main");
+              main.innerHTML = string;
+          }
+
+          // function to every word of a string into it's own span with an increasing animation delay
+            function animateString(string) {
+                var splitString = string.split(" ");
+                var newString = "";
+                for (var i = 0; i < splitString.length; i++) {
+                    newString += "<span class='blur-in' style='animation-delay: " + (i * 0.1) + "s'>" + splitString[i] + "</span> ";
+                }
+                return newString;
+            }
+
+
+            // function to generate a random HSL color
+            function generateColors() {
+                var hue = Math.floor(Math.random() * 360);
+
+                var saturation = 70;
+                var lightness = 40;
+                genAccent =  "hsl(" + (hue - 10) + ", " + saturation + "%, " + lightness + "%)";
+                document.documentElement.style.setProperty('--AccentColor', genAccent);
+
+                var saturation = 90;
+                var lightness = 5;
+                genBackground =  "hsl(" + (hue + 10) + ", " + saturation + "%, " + lightness + "%)";
+                document.documentElement.style.setProperty('--BackgroundColor', genBackground);  
+
+                var saturation = 70;
+                var lightness = 80;
+                genText =  "hsl(" + hue + ", " + saturation + "%, " + lightness + "%)";
+                document.documentElement.style.setProperty('--TextColor', genText);              
+            }
+
+          generateColors();
+          insertString(animateString(randomString(expand)));
+
+            // event listener for button
+            document.querySelector("button").addEventListener("click", function() {
+                generateColors();
+                insertString(animateString(randomString(expand)));
+            });
+      
+      </script>
+</body>
+</html>
