@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8" />
+    <title>What Is Gyan??</title>
+    <!-- inport Work Sans from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,600" rel="stylesheet">
+    <style>
+        /* 3 Css variable for BGcolor, textcolor, accentcolor */
+        :root {
+            --AccentColor: #hsl(0, 0%, 100%);
+            --BackgroundColor: #hsl(0, 0%, 0%);
+            --TextColor: hsl(0, 0%, 0%);
+        }
+        body {
+            background-color: var(--BackgroundColor);
+            color: #fff;
+            font-family: "Work Sans", Helvetica, Arial, sans-serif;
+            font-size: 1.5em;
+            font-weight: 300;
+            line-height: 1.5;
+            margin: 0;
+            padding: 10%;
+            text-align: center;
+        }
+        #title {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+            padding: 0;
+            text-align: center;
+            color: var(--AccentColor);
+        }
+        #main {
+            font-size: 4em;
+            font-weight: 300;
+            line-height: 1.1em;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: var(--TextColor);
+        }
+
+        button{
+            font-family: "Work Sans", Helvetica, Arial, sans-serif;
+            background-color: var(--AccentColor);
+            border: none;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 400;
+            margin: 28px 0 0 0;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-align: center;
+            transition: .1s;
+            border: 2px var(--AccentColor) solid;
+        }
+
+        button:hover{
+            background-color: var(--BackgroundColor)
+            color: #eee;
+            border: 2px var(--AccentColor) solid;
+        }
+        
+        button:active{
+            background-color: #000;
+            color: #ddd;
+            transform: translateY(1px);
+        }
+
+    /* class to animate from blurred element to unblurred element */
+    .blur-in {
+        -webkit-animation: blur-in 1s ease-in-out;
+        -moz-animation: blur-in 1s ease-in-out;
+        -o-animation: blur-in 1s ease-in-out;
+        animation: blur-in 1s ease-in-out;
+    }
+    /* blur-in definition */
+    @-webkit-keyframes blur-in {
+        0% {
+            -webkit-filter: blur(10px);
+            filter: blur(10px);
+            opacity: 0;
+        }
+        100% {
+            -webkit-filter: blur(0);
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="title">What is Gyan?</div>
+    <div id="main"></div>
+    <button>Regenerate</button>
+    <script>
+
+        var expand = new Array(
+          "Great Yearning And Nurturing",
+          "Gorgeous Yellow Autumn Nights",
+          "Genuine Youthful Ambition Network",
+          "Glittering Yoga And Nature",
+          "Generous Yet Ambitious Nature",
+          "Global Youth Action Network",
+          "Graceful Yet Assertive Nature",
+          "Glorious Yearly Achievement Network",
+          "Guiding You Along Navigation",
+          "Gourmet Yummy Appetizing Nibbles",
+          "Greatness Yielding Abundant Nirvana",
+          "Giving Your All Nicely",
+          "Growing Your Artistic Nature",
+          "Gaining Year-round Abundance Now",
+          "Going Yonder And Navigating",
+          "Grateful Yearly Appreciation Network",
+          "Gallant Youthful Adventure Network",
+          "Gregarious Yet Admirable Nature",
+          "Guiding Your Achievements Nicely",
+          "Grounded Yet Adventurous Nature",
+          "Genuine Yearning And Nurturing",
+          "Goodbye Yesterday, Announcing Now",
+          "Grow Your Ability Naturally",
+          "Grinning Yet Authentic Nature",
+          "Gaining Your Autonomy Now",
+          "Glorifying Your Authentic Nature",
+          "Genuine Yet Ambitious Nature",
+          "Get Your Act Noticed",
+          "Going Your Awesome New-way",
+          "Grooming Your Achievements Nicely",
+          "Going Your Active Next-level",
+          "Glowing Your Aura Naturally",
+          "Giving Yourself Ample Nurturing",
+          "Getting Your Affairs Normalized",
+          "Grateful Yet Ambitious Nature",
+          "Genuine You Achieving Nirvana",
+          "Globally Yours, Always Nurturing",
+          "Genuinely Yearning And Nurturing",
+          "Growing Your Artistic Network",
+          "Generating Your Awesome Newness",
+          "Gracefully Yielding Abundant Nourishment",
+          "Guiding You Always Nicely",
+          "Guiding Your Attitude Nicely",
+          "Graduating Your Achievements Nicely",
+          "Greatly Yearning And Nurturing",
+          "Glamorizing Your Authentic Nature",
+          "Generously Yielding And Nurturing",
+          "Gallantly Yielding Abundant Nourishment",
+          "Growth-oriented Yet Admirable Nature",
+          "Generating Your Ambitious Newness",
+          "Groundbreaking Yet Admirable Nature",
+          "Gigantic Yearning And Nurturing",
+          "Genuinely Yielding And Nurturing",
+          "Graciously Yielding Abundant Nourishment",
+          "Giving Your Ambitions New-wings",
+          "Going Your Adventurous New-way",
+          "Gleaming Your Aura Naturally",
+          "Growing Your Ambition Network",
+          "Guiding Your Ambitions Nicely",
+        );
+      
+          // function to take an array and return a random string
+          function randomString(array) {
+              var randomIndex = Math.floor(Math.random() * array.length);
+              return array[randomIndex];
+          }
+      
+          // function to insert string into div with id "main"
+          function insertString(string) {
+              var main = document.getElementById("main");
+              main.innerHTML = string;
+          }
+
+          // function to every word of a string into it's own span with an increasing animation delay
+            function animateString(string) {
+                var splitString = string.split(" ");
+                var newString = "";
+                for (var i = 0; i < splitString.length; i++) {
+                    newString += "<span class='blur-in' style='animation-delay: " + (i * 0.1) + "s'>" + splitString[i] + "</span> ";
+                }
+                return newString;
+            }
+
+
+            // function to generate a random HSL color
+            function generateColors() {
+                var hue = Math.floor(Math.random() * 360);
+
+                var saturation = 70;
+                var lightness = 40;
+                genAccent =  "hsl(" + (hue - 10) + ", " + saturation + "%, " + lightness + "%)";
+                document.documentElement.style.setProperty('--AccentColor', genAccent);
+
+                var saturation = 90;
+                var lightness = 5;
+                genBackground =  "hsl(" + (hue + 10) + ", " + saturation + "%, " + lightness + "%)";
+                document.documentElement.style.setProperty('--BackgroundColor', genBackground);  
+
+                var saturation = 70;
+                var lightness = 80;
+                genText =  "hsl(" + hue + ", " + saturation + "%, " + lightness + "%)";
+                document.documentElement.style.setProperty('--TextColor', genText);              
+            }
+
+          generateColors();
+          insertString(animateString(randomString(expand)));
+
+            // event listener for button
+            document.querySelector("button").addEventListener("click", function() {
+                generateColors();
+                insertString(animateString(randomString(expand)));
+            });
+      
+      </script>
+</body>
+</html>
