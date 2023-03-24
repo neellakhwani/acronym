@@ -24,6 +24,7 @@
             margin: 0;
             padding: 10%;
             text-align: center;
+            transition: 1s;
         }
         #title {
             font-size: 1em;
@@ -40,7 +41,7 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            color: var(--TextColor);
+            color: var(--BackgroundColor);
         }
 
         button{
@@ -67,36 +68,55 @@
         button:active{
             background-color: #000;
             color: #ddd;
-            transform: translateY(1px);
+            transform: translateY(4px);
+            transition: .2s;
         }
 
     /* class to animate from blurred element to unblurred element */
     .blur-in {
-        -webkit-animation: blur-in 1s ease-in-out;
-        -moz-animation: blur-in 1s ease-in-out;
-        -o-animation: blur-in 1s ease-in-out;
-        animation: blur-in 1s ease-in-out;
+        -webkit-animation: blur-in 1s forwards;
+        -moz-animation: blur-in 1s forwards;
+        -o-animation: blur-in 1s forwards;
+        animation: blur-in 1s forwards;
     }
-    /* blur-in definition */
+
+    .bounce-in{
+        -webkit-animation: bounce-in 1s ease-in-out;
+        -moz-animation: bounce-in 1s ease-in-out;
+        -o-animation: bounce-in 1s ease-in-out;
+        animation: bounce-in 1s ease-in-out;
+    }
+
+    /* blur-in definition for all browsers*/
     @-webkit-keyframes blur-in {
         0% {
             -webkit-filter: blur(10px);
             filter: blur(10px);
             opacity: 0;
-            transform: translateY(-4px);
+            transform: translateY(10%);
         }
         100% {
             -webkit-filter: blur(0);
             filter: blur(0);
             opacity: 1;
-            transform: translateY(0px);           
+            transform: translateY(0px);
+            color: var(--TextColor);           
+        }
+    }
+
+    @-webkit-keyframes bounce-in {
+        0% {
+            transform: translateY(10%);
+        }
+        100% {
+            transform: translateY(0px);
         }
     }
 
             /* mobile only css */
             @media only screen and (max-width: 600px) {
             body {
-                padding: 25% 0 0 0;
+                padding: 25% 5% 0 5%;
             }
             #main {
                 font-size: 2.5em;
@@ -161,12 +181,25 @@
         "Green Yolks Are Nasty",
         "Generate Your Alibis Now",
         );
-      
+
+          var lastpicked = 0;
           // function to take an array and return a random string
-          function randomString(array) {
-              var randomIndex = Math.floor(Math.random() * array.length);
-              return array[randomIndex];
-          }
+        //   function randomString(array) {
+        //       var randomIndex = Math.floor(Math.random() * array.length);
+        //       lastpicked = randomIndex;
+        //       return array[randomIndex];
+        //   }
+
+          // fn to get an array and return a random string that is not the same as the last one. Use recursion to ensure that the same string is not returned twice in a row.
+            function randomString(array) {
+                var randomIndex = Math.floor(Math.random() * array.length);
+                if (randomIndex == lastpicked) {
+                    return randomString(array);
+                } else {
+                    lastpicked = randomIndex;
+                    return array[randomIndex];
+                }
+            }
       
           // function to insert string into div with id "main"
           function insertString(string) {
@@ -179,7 +212,7 @@
                 var splitString = string.split(" ");
                 var newString = "";
                 for (var i = 0; i < splitString.length; i++) {
-                    newString += "<span class='blur-in' style='animation-delay: " + (i * 0.1) + "s'>" + splitString[i] + "</span> ";
+                    newString += "<span class='blur-in' style='animation-delay: " + (i * 0.12) + "s'>" + splitString[i] + "</span> ";
                 }
                 return newString;
             }
@@ -190,8 +223,8 @@
                 var hue = Math.floor(Math.random() * 360);
 
                 var saturation = 70;
-                var lightness = 40;
-                genAccent =  "hsl(" + (hue - 10) + ", " + saturation + "%, " + lightness + "%)";
+                var lightness = 45;
+                genAccent =  "hsl(" + (hue - 20) + ", " + saturation + "%, " + lightness + "%)";
                 document.documentElement.style.setProperty('--AccentColor', genAccent);
 
                 var saturation = 90;
@@ -205,13 +238,29 @@
                 document.documentElement.style.setProperty('--TextColor', genText);              
             }
 
+            // fn to make title bounce in
+            function titleBounce() {
+                var title = document.getElementById("title");
+                title.classList.add("bounce-in");
+            }
+
+            // fn to remove bounce-in class from title
+            function removeBounce() {
+                var title = document.getElementById("title");
+                title.classList.remove("bounce-in");
+            }
+
           generateColors();
           insertString(animateString(randomString(expand)));
+          titleBounce();
 
             // event listener for button
             document.querySelector("button").addEventListener("click", function() {
                 generateColors();
                 insertString(animateString(randomString(expand)));
+                removeBounce();
+                void document.getElementById("title").offsetWidth; // trigger reflow
+                titleBounce();
             });
       
       </script>
