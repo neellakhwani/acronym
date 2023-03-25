@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <meta charset="UTF-8" />
-    <title>What Is Gyan??</title>
+    <title>What Is NEEL??</title>
     <!-- import Manrope from Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Manrope:300,600" rel="stylesheet">
 
@@ -13,6 +13,10 @@
             --AccentColor: #hsl(0, 0%, 100%);
             --BackgroundColor: #hsl(0, 0%, 0%);
             --TextColor: hsl(0, 0%, 0%);
+        }
+
+        .confetti{
+            transition: 1s;
         }
 
         body {
@@ -34,6 +38,7 @@
             padding: 0;
             text-align: center;
             color: var(--AccentColor);
+            transition: 1s;
         }
         #main {
             font-size: 4em;
@@ -133,7 +138,7 @@
     </style>
 </head>
 <body>
-    <div id="title">What is Gyan?</div>
+    <div id="title">What is NEEL?</div>
     <div id="main"></div>
     <button>Regenerate</button>
     <script>
@@ -242,6 +247,38 @@
                 titleBounce();
             });
       
+            // on hovering on the title for 1 sec, make the text size smaller
+            document.getElementById("title").addEventListener("mouseover", function() {
+                var title = document.getElementById("title");
+                title.style.fontSize = ".5em";
+            });
+
+            // when mouse leaves title, make text size normal
+            document.getElementById("title").addEventListener("mouseout", function() {
+                var title = document.getElementById("title");
+                title.style.fontSize = "1em";
+            });
+
+            // generate random colored confetti shapes on mouseover on main
+            document.getElementById("main").addEventListener("mouseover", function() {
+                var main = document.getElementById("main");
+                var confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.position = "absolute";
+                confetti.style.zIndex = "-1";
+                confetti.style.borderRadius = Math.floor(Math.random() * 8) + "px";
+                confetti.style.top = Math.floor(Math.random() * 100) + "%";
+                confetti.style.left = Math.floor(Math.random() * 100) + "%";
+                confetti.style.width = Math.floor(Math.random() * 100) + "px";
+                confetti.style.height = Math.floor(Math.random() * 100) + "px";
+                confetti.style.backgroundColor = "hsl(" + Math.floor(Math.random() * 360) + ", 100%, 50%)";
+                main.appendChild(confetti);
+
+                setTimeout(function() {
+                    confetti.remove();
+                }, 1000);
+
+            });
       </script>
 </body>
 </html>
